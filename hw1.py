@@ -11,20 +11,20 @@ from sklearn.metrics import accuracy_score
 iris=load_iris()
 data=iris.data
 target=iris.target
-data_train, data_test, target_train, target_test=train_test_split(data, target, test_size=0.2, random_state=224)
+data_train, data_test, target_train, target_test=train_test_split(data, target, test_size=0.2, random_state=224) # 将20%的数据设定为测试数据
 train_result=[]
 test_result=[]
 
 for i in np.linspace(0.02, 1, 50):
   #train model
-  softmax=LogisticRegression(multi_class='multinomial', solver='lbfgs', C=i, max_iter=1000)
+  softmax=LogisticRegression(multi_class='multinomial', solver='lbfgs', C=i, max_iter=1000) 
   softmax=softmax.fit(data_train, target_train)
 
   #test model
-  #print(i)
   train_result.append(accuracy_score(softmax.predict(data_train), target_train))
   test_result.append(accuracy_score(softmax.predict(data_test), target_test))
 
+# draw graph
 graph=[train_result, test_result]
 color=['black', 'green']
 label=['train', 'test']
